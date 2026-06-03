@@ -22,12 +22,9 @@ function saveMockSettings(settings) {
 export const getSettingsApi = async () => {
   try {
     const response = await api.get('/settings/current')
-    const settingsList = response.data
+    const settings = response.data //Directly access the object
 
-    // Return the first settings entry or default properties if empty
-    const savedSettings = settingsList.find(s => s.setting_id === 1)
-
-    const settings = savedSettings || settingsList[0] || {
+    const fallbackSettings = settings || {
       annualLeaveAllowance: 25,
       sickLeaveAllowance: 10,
       carryOverEnabled: true,
@@ -41,10 +38,10 @@ export const getSettingsApi = async () => {
     return {
       success: true,
       data: {
-        ...settings,
-        holidays: Array.isArray(settings.holidays)
-          ? settings.holidays
-          : JSON.parse(settings.holidays || "[]"),
+        ...fallbackSettings,
+        holidays: Array.isArray(fallbackSettings.holidays)
+          ? fallbackSettings.holidays
+          : JSON.parse(fallbackSettings.holidays || "[]"),
       },
     }
   } catch (error) {
