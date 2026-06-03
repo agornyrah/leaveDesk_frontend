@@ -7,6 +7,7 @@ import { useAuthStore } from '../../stores/auth.store.js'
 import { useWorkingDays } from '../../composables/useWorkingDays.js'
 import { useSettingsStore } from '../../stores/settings.store.js'
 import { useLeaveBalance } from '@/composables/useLeaveBalance.js'
+import { LEAVE_TYPES } from '../../constants/leaveTypes.js'
 import { storeToRefs } from 'pinia'
 
 const router = useRouter()
@@ -23,11 +24,10 @@ const endDate = ref('')
 const note = ref('')
 const isLoading = ref(false)
 
-const leaveTypes = [
-  { title: 'Annual leave', value: 'Annual Leave' },
-  { title: 'Sick leave', value: 'Sick Leave' },
-  { title: 'Other Reason', value: 'Other Reason' },
-]
+const leaveTypes = LEAVE_TYPES.map(type => ({
+  title: type.name,
+  value: type.name,
+}))
 
 onMounted(async () => {
   await Promise.all([
@@ -138,7 +138,7 @@ function onCancel() {
             v-for="type in leaveTypes"
             :key="type.value"
             cols="12"
-            sm="4"
+            sm="6"
           >
             <!-- Card selector matching primary burgundy colors -->
             <v-card
@@ -264,6 +264,20 @@ function onCancel() {
             >
               You have {{ sickDaysRemaining }} sick days remaining
               {{ hasEnoughBalance ? '— enough to cover this request.' : '— not enough for this request.' }}
+            </span>
+          </div>
+        </v-card>
+
+        <v-card
+          v-if="selectedLeaveType === 'Unpaid Leave' && workingDays > 0"
+          class="pa-4 rounded-lg mb-6"
+          color="#FFFBEB"
+          variant="flat"
+        >
+          <div class="d-flex align-center justify-center ga-2">
+            <v-icon color="amber-darken-3" size="25">mdi-information-outline</v-icon>
+            <span class="font-weight-bold text-amber-darken-4">
+              This request will not deduct from your annual or sick leave balance.
             </span>
           </div>
         </v-card>

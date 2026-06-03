@@ -26,6 +26,7 @@ function getLeaveTypeColor(type) {
   if (t?.includes('annual')) return { bg: '#EDE9FE', textClass: 'text-deep-purple-darken-2' }
   if (t?.includes('sick')) return { bg: '#E0F2FE', textClass: 'text-blue-darken-3' }
   if (t?.includes('other')) return { bg: '#F1F5F9', textClass: 'text-grey-darken-3' }
+  if (t?.includes('unpaid')) return { bg: '#FEF3C7', textClass: 'text-amber-darken-4' }
   return { bg: '#F5F4F0', textClass: 'text-grey-darken-3' }
 }
 
