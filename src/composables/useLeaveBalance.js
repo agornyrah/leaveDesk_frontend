@@ -10,7 +10,15 @@ export function useLeaveBalance() {
     const calculateRemainingLeaves = (approvedRequests, leaveType = 'Annual Leave') => {
 
         // Fall back to settingsStore value instead of a hardcoded number
-        const allowance = leaveType === 'Sick Leave' ? settingsStore.sickLeaveAllowance : settingsStore.annualLeaveAllowance;
+        let allowance = 0
+
+        if (leaveType === 'Annual Leave') {
+            allowance = settingsStore.annualLeaveAllowance
+        } else if (leaveType === 'Sick Leave') {
+            allowance = settingsStore.sickLeaveAllowance
+        } else {
+            return 0
+        }
 
         if (!approvedRequests || approvedRequests.length === 0)
             return allowance;

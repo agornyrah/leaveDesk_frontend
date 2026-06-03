@@ -1,3 +1,10 @@
+export const UNPAID_LEAVE = 'Unpaid Leave'
+
+export const PAID_LEAVE_TYPES = [
+  'Annual Leave',
+  'Sick Leave',
+]
+
 export const LEAVE_TYPES = [
     {
         id: 1,
@@ -16,5 +23,12 @@ export const LEAVE_TYPES = [
         name: 'Other Reason',
         code: 'OR',
         status: 'Active',
-    }
+    },
+    {
+        id: 4,
+        name: 'Unpaid Leave',
+        code: 'UL',
+        status: 'Active',
+    },
 ]
+

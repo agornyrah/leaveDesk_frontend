@@ -44,8 +44,10 @@ const leaveBalances = computed(() => [
     label: 'days remaining',
   },
   {
-    title: 'Used this year',
-    days: myApprovedRequests.value.reduce((total, req) => total + calculateWorkingDays(req.startDate, req.endDate), 0),
+    title: 'Paid Leave Used',
+    days: myApprovedRequests.value
+      .filter(req => ['Annual Leave', 'Sick Leave'].includes(req.leaveType))
+      .reduce((total, req) => total + calculateWorkingDays(req.startDate, req.endDate), 0),
     label: 'days taken',
   },
 ])

@@ -49,8 +49,11 @@ const balanceStats = computed(() => [
     count: calculateRemainingLeaves(approvedEmployeeRequests.value, 'Sick Leave'),
   },
   {
-    title: 'Used Leaves',
-    count: approvedEmployeeRequests.value.reduce((total, req) => total + calculateWorkingDays(req.startDate, req.endDate), 0),
+    title: 'Paid Leave Used',
+    count: approvedEmployeeRequests.value.filter(req => ['Annual Leave', 'Sick Leave'].includes(req.leaveType)).reduce(
+      (total, req) => total + calculateWorkingDays(req.startDate, req.endDate),
+      0
+    ),
   },
 ])
 
@@ -129,6 +132,7 @@ const leaveTypeColorMap = {
   'AL': { bg: '#EDE9FE', textClass: 'text-deep-purple-darken-2' },
   'SL': { bg: '#E0F2FE', textClass: 'text-blue-darken-3' },
   'OR': { bg: '#F1F5F9', textClass: 'text-grey-darken-3' },
+  'UL': { bg: '#FEF3C7', textClass: 'text-amber-darken-4' },
 }
 
 function getLeaveTypeConfig(typeName) {
