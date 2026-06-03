@@ -1,0 +1,1 @@
+function e(){return{calculateWorkingDays:(e,t)=>{if(!e||!t)return 0;let n=new Date(e),r=new Date(t),i=0;for(;n<=r;){let e=n.getDay();e!==0&&e!==6&&i++,n.setDate(n.getDate()+1)}return i},formatDate:e=>e?new Date(e).toLocaleDateString(void 0,{year:`numeric`,month:`short`,day:`numeric`}):``}}export{e as t};
