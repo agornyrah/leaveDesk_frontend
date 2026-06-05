@@ -185,19 +185,20 @@ async function deactivateEmployee() {
   if (success) {
     showDeactivateDialog.value = false
     await employeeStore.getAllEmployees()
-  }
-}
-
-async function activateEmployee() {
-  if (!employee.value) return
-
-  const success = await employeeStore.activateEmployee(employee.value.id)
-
-  if (success) {
-    await employeeStore.getAllEmployees()
     router.push({ name: 'StaffOverview' })
   }
 }
+
+// async function activateEmployee() {
+//   if (!employee.value) return
+
+//   const success = await employeeStore.activateEmployee(employee.value.id)
+
+//   if (success) {
+//     await employeeStore.getAllEmployees()
+//     // router.push({ name: 'StaffOverview' })
+//   }
+// }
 
 async function permanentlyDeleteEmployee() {
   if (!employee.value) return
@@ -296,7 +297,7 @@ function sendMessage() {
             >
               Edit Employee
             </v-btn>
-            <v-btn
+            <!-- <v-btn
               v-if="isInactive"
               prepend-icon="mdi-account-check-outline"
               class="font-weight-bold px-13"
@@ -305,7 +306,7 @@ function sendMessage() {
               @click="activateEmployee"
             >
               Activate
-            </v-btn>
+            </v-btn> -->
             <v-btn
               prepend-icon="mdi-email-outline"
               class="font-weight-bold px-4"
@@ -316,7 +317,7 @@ function sendMessage() {
             >
               Message Employee
             </v-btn>
-            <v-btn
+            <!-- <v-btn
               v-if="!isInactive"
               prepend-icon="mdi-account-off-outline"
               class="font-weight-bold px-11"
@@ -325,8 +326,18 @@ function sendMessage() {
               @click="showDeactivateDialog = true"
             >
               Deactivate
-            </v-btn>
+            </v-btn> -->
             <v-btn
+              prepend-icon="mdi-delete-outline"
+              class="font-weight-bold px-6"
+              variant="flat"
+              color="#58111A"
+              :disabled="isInactive"
+              @click="showDeactivateDialog = true"
+            >
+              Delete Employee
+            </v-btn>
+            <!-- <v-btn
               v-if="isInactive"
               prepend-icon="mdi-delete-outline"
               class="font-weight-bold px-4"
@@ -335,7 +346,7 @@ function sendMessage() {
               @click="showPermanentDeleteDialog = true"
             >
               Permanently Delete
-            </v-btn>
+            </v-btn> -->
           </v-col>
         </v-row>
 
@@ -470,16 +481,16 @@ function sendMessage() {
 
   <ConfirmDialog
     v-model="showDeactivateDialog"
-    title="Deactivate Employee"
-    message="This employee will be marked inactive and will no longer be able to log in. Their leave history will remain available."
-    confirm-label="Deactivate"
+    title="Delete Employee"
+    message="Are you sure you want to delete this employee? This will remove them from the system, but their past leave request history will be preserved."
+    confirm-label="Delete"
     confirm-color="#58111A"
-    icon="mdi-account-off-outline"
+    icon="mdi-delete-outline"
     :loading="isLoading"
     @confirm="deactivateEmployee"
   />
 
-  <ConfirmDialog
+  <!-- <ConfirmDialog
     v-model="showPermanentDeleteDialog"
     title="Delete Permanently"
     message="This will permanently remove the employee account. This action cannot be undone."
@@ -488,5 +499,5 @@ function sendMessage() {
     icon="mdi-delete-outline"
     :loading="isLoading"
     @confirm="permanentlyDeleteEmployee"
-  />
+  /> -->
 </template>

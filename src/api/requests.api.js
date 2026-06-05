@@ -44,7 +44,7 @@ export const getAllRequestsApi = async () => {
       data: mapped
     }
   } catch (error) {
-    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'false') {
+    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'true') {
       return {
         success: true,
         data: getMockRequests(),
@@ -92,7 +92,7 @@ export const createRequestApi = async (data) => {
       }
     }
   } catch (error) {
-    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'false') {
+    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'true') {
       const requests = getMockRequests()
 
       const newRequest = {
@@ -151,7 +151,7 @@ export const updateRequestApi = async (id, data) => {
       }
     }
   } catch (error) {
-    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'false') {
+    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'true') {
       const requests = getMockRequests()
 
       const index = requests.findIndex(r => String(r.id) === String(id))
@@ -190,7 +190,7 @@ export const deleteRequestApi = async (id) => {
     }
 
   } catch (error) {
-    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'false') {
+    if (import.meta.env.VITE_USE_MOCK_REQUESTS === 'true') {
       const requests = getMockRequests()
       const filteredRequests = requests.filter(
         r => String(r.id) !== String(id)

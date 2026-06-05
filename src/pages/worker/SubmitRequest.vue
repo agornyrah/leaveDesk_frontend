@@ -229,7 +229,7 @@ function onCancel() {
           :color="hasEnoughBalance ? '#F0FDF4' : '#FEF2F2'"
           variant="flat"
         >
-          <div class="d-flex align-center ga-2">
+          <div class="d-flex align-center justify-center ga-2">
             <v-icon
               :color="hasEnoughBalance ? 'green-darken-2' : 'red-darken-2'"
               size="25"
@@ -251,7 +251,7 @@ function onCancel() {
           :color="hasEnoughBalance ? '#F0FDF4' : '#FEF2F2'"
           variant="flat"
         >
-          <div class="d-flex align-center ga-2">
+          <div class="d-flex align-center justify-center ga-2">
             <v-icon
               :color="hasEnoughBalance ? 'green-darken-2' : 'red-darken-2'"
               size="25"

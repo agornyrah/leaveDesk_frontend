@@ -97,14 +97,14 @@ async function onSubmit() {
         password.value
     )
 
-    if(result){
-        successMessage.value = "Registration successful! Redirecting to login..."
-        setTimeout(() => {
-            router.push('/')
-        }, 2000)
+    if (result) {
+      successMessage.value = "Registration successful! Redirecting to login..."
+      setTimeout(() => {
+        router.push('/')
+      }, 2000)
     }
-    else{
-        errorMessage.value = "Registration failed. Please try again."
+    else {
+      errorMessage.value = "Registration failed. Please try again."
     }
 
   } catch (error) {
